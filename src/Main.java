@@ -32,7 +32,8 @@ public class Main {
             // až „Tulipán na prodej 10“. Zasazeny byly dnes, zality také,
             // frekvence zálivky je 14 dnů.
             for(int i=1; i<=10;i++){
-                plantListManager.addPlant(new Plant("Tulipán"+i,"Tulipán na prodej " +i,LocalDate.now(),LocalDate.now(),14));
+                char letter = (char) ('A' + i-1);
+                plantListManager.addPlant(new Plant("Tulipán"+letter,"Tulipán na prodej " +i,LocalDate.now(),LocalDate.now(),14));
                 }
 
             //5.Květinu na třetí pozici odeber ze seznamu (prodali jsme ji).
