@@ -8,16 +8,16 @@ import java.util.Scanner;
 public class PlantListManager {
    private List<Plant> plantList;
 
-    public List<Plant> getPlantList() {
+    public PlantListManager() {
+        this.plantList = new ArrayList<>();
+    }
+
+   public List<Plant> getPlantList() {
         return plantList;
     }
 
     public void setPlantList(List<Plant> plantList) {
         this.plantList = plantList;
-    }
-
-    public PlantListManager() {
-        this.plantList = new ArrayList<>();
     }
 
     public void addPlant(Plant plant){
