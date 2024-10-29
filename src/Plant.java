@@ -1,5 +1,4 @@
 import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 
 public class Plant implements Comparable<Plant>{
     private String name;
