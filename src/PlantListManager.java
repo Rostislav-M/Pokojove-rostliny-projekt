@@ -20,7 +20,7 @@ public class PlantListManager {
     public void setPlantList(List<Plant> plantList) {
         this.plantList = plantList;
     }
-
+    //přidání nové květiny
     public void addPlant(Plant plant){
         plantList.add(plant);
     }
