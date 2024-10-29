@@ -88,7 +88,7 @@ public class Plant implements Comparable<Plant>{
         return frequencyOfWatering;
     }
 
-    public String getWaterInfo(){
+    public String getWateringInfo(){
         LocalDate nextWatering= wateringDate.plusDays(frequencyOfWatering);
         return "název květiny: " + name + ", datum poslední zálivky: " + wateringDate
                 + ", datum doporučené další zálivky: " + nextWatering;

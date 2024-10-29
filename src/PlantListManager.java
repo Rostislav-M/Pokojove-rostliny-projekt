@@ -67,7 +67,7 @@ public class PlantListManager {
             throw new PlantException("Seznam rostlin je prázdný! ");
         }
         for(Plant plant: plantList){
-            System.out.println(plant.getWaterInfo());
+            System.out.println(plant.getWateringInfo());
         }
     }
 
