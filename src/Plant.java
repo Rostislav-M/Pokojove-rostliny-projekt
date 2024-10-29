@@ -42,40 +42,6 @@ public class Plant implements Comparable<Plant>{
         this.wateringDate = LocalDate.now();
     }
 
-    public static Plant parsePlant(String line, String delimeter,int lineNumber) throws PlantException {
-        int numberOfParts=5;
-        String[] parts = line.split(delimeter);
-        if (parts.length !=numberOfParts){
-            throw new PlantException("nesprávný počet položek na řádku číslo: " + lineNumber
-                    + " Očekávaný počet položek je: " + numberOfParts );
-        }
-        String name= parts[0];
-        if(name.isEmpty()){
-            throw new PlantException("jméno rostliny nemůže být prázdné na řádku: " + lineNumber);
-        }
-
-        try {
-            String notes=parts[1];
-            int frequencyOfWatering= Integer.parseInt(parts[2]);
-            LocalDate wateringDate= LocalDate.parse(parts[3]);
-            LocalDate plantedDate=LocalDate.parse(parts[4]);
-            return new Plant(name,notes,plantedDate,wateringDate,frequencyOfWatering);
-        } catch (DateTimeParseException e ) {
-            throw new PlantException("Chybný formát data! " + "na řádku čislo: "+lineNumber);
-        } catch (NumberFormatException e){
-            throw new PlantException("Chybný formát frekvence zálivky! " + "na řádku číslo: "+lineNumber);
-        }
-
-    }
-    public String toFileString(String delimeter)
-    {
-        return name + delimeter +
-                notes + delimeter +
-                frequencyOfWatering + delimeter +
-                wateringDate + delimeter +
-                plantedDate;
-    }
-
     public String getName() {
         return name;
     }

@@ -1,5 +1,6 @@
 import java.io.*;
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -88,7 +89,7 @@ public class PlantListManager {
             while (scanner.hasNextLine()){
                 String line= scanner.nextLine();
                 lineNumber++;
-                plantList.add(Plant.parsePlant(line,delimeter,lineNumber));
+                plantList.add(parsePlant(line,delimeter,lineNumber));
             }
 
         } catch (IOException e) {
@@ -97,10 +98,42 @@ public class PlantListManager {
         }
 
     }
+    public static Plant parsePlant(String line, String delimeter,int lineNumber) throws PlantException {
+        int numberOfParts=5;
+        String[] parts = line.split(delimeter);
+        if (parts.length !=numberOfParts){
+            throw new PlantException("nesprávný počet položek na řádku číslo: " + lineNumber
+                    + " Očekávaný počet položek je: " + numberOfParts );
+        }
+        String name= parts[0];
+        if(name.isEmpty()){
+            throw new PlantException("jméno rostliny nemůže být prázdné na řádku: " + lineNumber);
+        }
+
+        try {
+            String notes=parts[1];
+            int frequencyOfWatering= Integer.parseInt(parts[2]);
+            LocalDate wateringDate= LocalDate.parse(parts[3]);
+            LocalDate plantedDate=LocalDate.parse(parts[4]);
+            return new Plant(name,notes,plantedDate,wateringDate,frequencyOfWatering);
+        } catch (DateTimeParseException e ) {
+            throw new PlantException("Chybný formát data! " + "na řádku čislo: "+lineNumber);
+        } catch (NumberFormatException e){
+            throw new PlantException("Chybný formát frekvence zálivky! " + "na řádku číslo: "+lineNumber);
+        }
+
+    }
+
     public void saveToFile(String filenameToWrite, String delimeter) throws PlantException {
         try (PrintWriter printWriter = new PrintWriter(new BufferedWriter(new FileWriter(filenameToWrite)))) {
             for (Plant plant : plantList) {
-                printWriter.println(plant.toFileString(delimeter));
+                printWriter.println(
+                                plant.getName() + delimeter
+                                +plant.getNotes() + delimeter
+                                +plant.getFrequencyOfWatering() + delimeter
+                                +plant.getWateringDate() + delimeter
+                                +plant.getPlantedDate()
+                );
             }
         } catch (IOException e) {
             throw new PlantException(" Soubor: " + filenameToWrite + " nebyl nalezen " + "\n" + e.getLocalizedMessage());
