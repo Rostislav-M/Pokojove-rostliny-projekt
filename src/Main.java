@@ -18,7 +18,7 @@ public class Main {
             //Oveřování funkčnosti aplikace:
 
             //1. Načti seznam květin ze souboru kvetiny.txt.
-             loadFile(plantListManager,FILENAME);
+            loadFile(plantListManager,FILENAME);
 
             //2. Vypiš na obrazovku informace o zálivce pro všechny květiny ze seznamu.
             System.out.println("bod č.2 Vypiš na obrazovku informace o zálivce pro všechny květiny ze seznamu: ");
