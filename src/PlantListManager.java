@@ -53,7 +53,8 @@ public class PlantListManager {
         List<Plant> plantsListReqWatering = new ArrayList<>();
 
         for (Plant plant: plantList){
-            if(plant.getWateringDate().isBefore(LocalDate.now().minusDays(plant.getFrequencyOfWatering()))){
+            if (plant.getWateringDate().isBefore(LocalDate.now().minusDays(plant.getFrequencyOfWatering())) ||
+              plant.getWateringDate().plusDays(plant.getFrequencyOfWatering()).isEqual(LocalDate.now()))  {
                 plantsListReqWatering.add(plant);
             }
 
